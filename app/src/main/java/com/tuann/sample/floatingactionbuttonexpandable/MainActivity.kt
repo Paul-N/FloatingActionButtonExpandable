@@ -1,9 +1,9 @@
 package com.tuann.sample.floatingactionbuttonexpandable
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +19,12 @@ class MainActivity : AppCompatActivity() {
 
         val fab = findViewById<FloatingActionButtonExpandable>(R.id.fab)
         val recyclerView = findViewById<RecyclerView>(R.id.recycleView)
-        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        recyclerView.layoutManager =
+            LinearLayoutManager(
+                this,
+                LinearLayoutManager.VERTICAL,
+                false
+            )
         val adapter = TestAdapter()
         recyclerView.adapter = adapter
 

@@ -6,13 +6,12 @@ import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.os.Parcel
 import android.os.Parcelable
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.CardView
+import androidx.core.content.ContextCompat
+import androidx.cardview.widget.CardView
 import android.transition.Transition
 import android.transition.TransitionInflater
 import android.transition.TransitionManager
 import android.util.AttributeSet
-import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +21,7 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 
 class FloatingActionButtonExpandable @JvmOverloads constructor(
     context: Context,
@@ -80,19 +80,11 @@ class FloatingActionButtonExpandable @JvmOverloads constructor(
             resources.getDimensionPixelSize(R.dimen.padding_fab_default)
         )
         val expanded = arr.getBoolean(R.styleable.FloatingActionButtonExpandable_fab_expanded, true)
-        val typefacePath = arr.getString(R.styleable.FloatingActionButtonExpandable_fab_typeface)
         var typeface: Typeface? = null
-        typefacePath?.let {
-            if (it.isNotEmpty()) {
-                try {
-                    typeface = Typeface.createFromAsset(
-                        context.assets,
-                        typefacePath
-                    )
-                } catch (e: RuntimeException) {
-                    Log.e(TAG, e.toString())
-                }
-            }
+        if (arr.hasValue(R.styleable.FloatingActionButtonExpandable_fab_typeface))
+        {
+            val fontId = arr.getResourceId(R.styleable.FloatingActionButtonExpandable_fab_typeface, -1)
+            typeface = ResourcesCompat.getFont(context, fontId)
         }
         arr.recycle()
 
